@@ -1,7 +1,7 @@
 class Card
   RANKS = ["2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A"].freeze
   SUITS = ["diamonds", "clubs", "hearts", "spades"].freeze
-  attr_reader :rank
+  attr_reader :rank, :suit
   def initialize(rank, suit)
     @rank =  rank
     @suit = suit
