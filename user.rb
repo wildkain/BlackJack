@@ -1,5 +1,6 @@
 class User
-  attr_accessor :name, :hand, :scores
+  include Comparable
+  attr_accessor :name, :hand, :scores, :cash
 
   def initialize(name)
     @name = name
@@ -8,17 +9,41 @@ class User
     @scores = calculate_cards!
   end
 
+  def beat(value)
+    @cash -= value
+  end
+
+  def <=>(other)
+    scores > other.scores && scores <= 21
+  end
+
+  def winning(value)
+    @cash += value
+  end
 
   def calculate_cards!
     value = 0
-    @hand.each do |card|
-      value += card.value
+    if hand.size.zero?
+      value
+    else
+      @hand.each do |card|
+        mid_value = card.value
+        if card.ace?
+          if scores < 11
+            card.value
+          else
+            mid_value = 1
+          end
+        end
+        value += mid_value
+        @scores = value
+      end
     end
-   @scores =  value
   end
+
+  def ace_value(value); end
 
   def show_cards
-    @hand.each { |card| print "#{card}"}
+    @hand.each { |card| print card.to_s }
   end
-
 end

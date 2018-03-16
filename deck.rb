@@ -1,12 +1,12 @@
 class Deck
-attr_accessor :cards
+  attr_accessor :cards
 
   def initialize
     @cards = Deck.build
   end
 
   def self.build
-    @cards  = []
+    @cards = []
     Card::RANKS.each do |rank|
       Card::SUITS.each do |suit|
         @cards << Card.new(rank, suit)
@@ -14,6 +14,4 @@ attr_accessor :cards
     end
     @cards.shuffle!
   end
-
-
 end

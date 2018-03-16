@@ -1,15 +1,23 @@
 class Card
-  RANKS = ["2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A"].freeze
-  SUITS = ["diamonds", "clubs", "hearts", "spades"].freeze
-  attr_reader :rank, :suit
+  RANKS = %w[2 3 4 5 6 7 8 9 10 J Q K A].freeze
+  SUITS = %w[diamonds clubs hearts spades].freeze
+  attr_accessor :rank, :suit
   def initialize(rank, suit)
-    @rank =  rank
+    @rank = rank
     @suit = suit
   end
 
   def value
-    return self.rank.to_i if ["2", "3", "4", "5", "6", "7", "8", "9", "10"].include?(self.rank)
-    return 10 if ["J", "Q", "K", "A"].include?(self.rank)
+    return rank.to_i if %w[2 3 4 5 6 7 8 9 10].include?(rank)
+    return 10 if %w[J Q K].include?(rank)
+    11 if ['A'].include?(rank)
   end
 
+  def show
+    "|#{rank} - #{suit}|"
+  end
+
+  def ace?
+    rank == 'A'
+  end
 end
