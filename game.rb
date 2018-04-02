@@ -34,7 +34,7 @@ class Game
     case answer
     when 1
       cancel_game
-      start!
+      try_new_game
     when 2
       interface.goodbye
       abort
@@ -44,6 +44,19 @@ class Game
   rescue RuntimeError => error
     p error.message.to_s
     retry
+  end
+
+  def try_new_game
+    if have_money?
+      start!
+    else
+      interface.no_money_no_honey
+      abort
+    end
+  end
+
+  def have_money?
+    return true if @dealer.cash > 0 && @player.cash > 0
   end
 
   # experimental method with using Comparable in User class

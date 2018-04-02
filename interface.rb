@@ -55,4 +55,8 @@ class Interface
   def goodbye
     'This is GOOD GAME, Bro! See you later.'
   end
+
+  def no_money_no_honey
+    p "So sorry. We can't play else("
+  end
 end
