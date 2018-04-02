@@ -81,8 +81,8 @@ class Round
   end
 
   def make_beats(value)
-    @player.beat(value)
-    @dealer.beat(value)
+    @player.bet(value)
+    @dealer.bet(value)
     @bank += (value * 2)
   end
 

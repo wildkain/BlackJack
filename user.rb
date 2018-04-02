@@ -9,12 +9,8 @@ class User
     @scores = 0
   end
 
-  def beat(value)
+  def bet(value)
     @cash -= value
-  end
-
-  def <=>(other)
-    scores > other.scores && scores <= 21
   end
 
   def winning(value)

@@ -58,11 +58,4 @@ class Game
   def have_money?
     return true if @dealer.cash > 0 && @player.cash > 0
   end
-
-  # experimental method with using Comparable in User class
-  def get_winner(user, dealer)
-    return user if user <=> dealer
-    return dealer if dealer <=> user
-    false
-  end
 end
