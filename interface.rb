@@ -22,7 +22,7 @@ class Interface
   end
 
   def show_info(user)
-    p "Cards #{user.hand}. Scores: #{user.scores}. Cash: #{user.cash}"
+    p "#{user.name} Cards #{user.hand}. Scores: #{user.scores}. Cash: #{user.cash}"
   end
 
   def prepare_deck

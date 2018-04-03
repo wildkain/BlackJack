@@ -35,6 +35,9 @@ class Round
     take_card(@player)
     interface.show_last_card(@player)
     dealer_hit
+    interface.line
+    open_cards
+    interface.line
   end
 
   def dealer_hit
