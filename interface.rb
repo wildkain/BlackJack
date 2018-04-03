@@ -27,7 +27,6 @@ class Interface
 
   def prepare_deck
     p 'Now we prepare deck and shuffle'
-    sleep 1
     p 'You and the dealer get 2 cards'
   end
 

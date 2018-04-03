@@ -1,16 +1,18 @@
+require_relative 'deck.rb'
 class Round
   attr_accessor :user, :dealer, :interface, :bank
 
-  def initialize(user, dealer, deck, interface)
+  def initialize(user, dealer, interface)
     @player = user
     @dealer = dealer
-    @deck = deck
+    @deck = Deck.new
     @interface = interface
     @bank = 0
   end
 
   def start!
     interface.prepare_deck
+    p "Cards:- -- #{@deck.cards.size}"
     first_distribution
     make_beats(10)
     interface.show_cards(@player)
