@@ -44,7 +44,9 @@ class Round
     return if @dealer.scores >= 17
     take_card(@dealer)
     interface.show_last_card(@dealer)
-    interface.show_cards(@dealer)
+    interface.line
+    open_cards
+    interface.line
   end
 
   def first_distribution

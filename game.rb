@@ -18,7 +18,10 @@ class Game
   def start!
     @round = Round.new(@player, @dealer, @deck, @interface)
     round.start!
-    new_game
+    while need_new_game? && can_new_game?
+      start!
+    end
+    abort
   end
 
   private
@@ -28,27 +31,29 @@ class Game
     @dealer.hand.clear
   end
 
-  def new_game
+  def need_new_game?
+    begin
     interface.line
     answer = interface.new_game_answer
     case answer
     when 1
       cancel_game
-      try_new_game
+      true
     when 2
       interface.goodbye
       abort
     else
-      raise RuntimeError
+      raise "Wrong answer"
     end
   rescue RuntimeError => error
     p error.message.to_s
     retry
+      end
   end
 
-  def try_new_game
+  def can_new_game?
     if have_money?
-      start!
+      true
     else
       interface.no_money_no_honey
       abort
