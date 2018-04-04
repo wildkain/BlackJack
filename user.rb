@@ -1,5 +1,5 @@
+require_relative 'interface.rb'
 class User
-  include Comparable
   attr_accessor :name, :hand, :scores, :cash
 
   def initialize(name)
@@ -15,9 +15,5 @@ class User
 
   def winning(value)
     @cash += value
-  end
-
-  def show_cards
-    @hand.each { |card| print card.to_s }
   end
 end

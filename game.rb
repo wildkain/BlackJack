@@ -19,6 +19,7 @@ class Game
       @round = Round.new(@player, @dealer, @interface)
       round.start!
     end
+    interface.goodbye
   end
 
   private
@@ -29,7 +30,6 @@ class Game
   end
 
   def need_new_game?
-
     interface.line
     answer = interface.new_game_answer
     case answer
@@ -37,15 +37,13 @@ class Game
       cancel_game
       true
     when 2
-      interface.goodbye
-      abort
+      false
     else
-      raise "Wrong answer"
+      raise 'Wrong answer'
     end
   rescue RuntimeError => error
     p error.message.to_s
     retry
-
   end
 
   def can_new_game?
@@ -53,11 +51,11 @@ class Game
       true
     else
       interface.no_money_no_honey
-      abort
+      false
     end
   end
 
   def have_money?
-    return true if @dealer.cash > 0 && @player.cash > 0
+    @dealer.cash > 0 && @player.cash > 0
   end
 end

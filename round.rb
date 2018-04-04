@@ -12,12 +12,17 @@ class Round
 
   def start!
     interface.prepare_deck
-    p "Cards:- -- #{@deck.cards.size}"
     first_distribution
     make_beats(10)
     interface.show_cards(@player)
     interface.show_dealer_cards(@dealer)
-    action = interface.get_action
+    begin
+      action = interface.get_action
+      raise 'Incorrect choice' unless (1..3).cover?(action)
+    rescue RuntimeError => error
+      p error.message.to_s
+      retry
+    end
     do_action(action)
   end
 
@@ -63,11 +68,8 @@ class Round
     when 1 then player_hit
     when 2 then stand
     when 3 then open_cards
-    else
-      abort
     end
     show_winner
-    # new_game
   end
 
   def open_cards
@@ -79,11 +81,11 @@ class Round
     win = who_win?
     if win.is_a?(User)
       win.winning(@bank)
-      p "#{win.name}  WIN!!! Scores: #{win.scores} Cash: #{win.cash}"
+      interface.show_winner(win)
     else
       @player.cash += (@bank / 2)
       @dealer.cash += (bank / 2)
-      p ' Nobody wins('
+      interface.nobody_wins
     end
   end
 

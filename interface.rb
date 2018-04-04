@@ -58,4 +58,12 @@ class Interface
   def no_money_no_honey
     p "So sorry. We can't play else("
   end
+
+  def show_winner(user)
+    p "#{user.name}  WIN!!! Scores: #{user.scores} Cash: #{user.cash}"
+  end
+
+  def nobody_wins
+    p ' Nobody wins('
+  end
 end
